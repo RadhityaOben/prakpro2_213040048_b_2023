@@ -6,7 +6,21 @@ public class BiodataTable extends JFrame {
     
     public BiodataTable() {
         // Membuat ketika klik close maka akan berhenti
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if(JOptionPane.showConfirmDialog(
+                    BiodataTable.this, 
+                    "Apakah anda yakin ingin keluar?", 
+                    "Exit", JOptionPane.YES_NO_OPTION
+                ) == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+                else {
+                    setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                }
+            }
+        });
 
         // Membuat label dan textfield untuk nama
         JLabel labelInputNama = new JLabel("Nama:");
